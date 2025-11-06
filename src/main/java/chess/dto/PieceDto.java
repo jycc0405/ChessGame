@@ -1,4 +1,4 @@
 package chess.dto;
 
-public class PieceDto {
+public record PieceDto(String type, String color, int x, int y) {
 }

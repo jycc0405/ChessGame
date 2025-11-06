@@ -22,6 +22,12 @@ public class Knight extends Piece {
     }
 
     @Override
+    public Piece copy() {
+        Position posCopy = new Position(position);
+        return new Knight(this.color, posCopy);
+    }
+
+    @Override
     public String toString() {
         return color.getStr() + "Knight";
     }

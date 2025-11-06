@@ -22,6 +22,12 @@ public class Bishop extends Piece {
     }
 
     @Override
+    public Piece copy() {
+        Position posCopy = new Position(position);
+        return new Bishop(this.color, posCopy);
+    }
+
+    @Override
     public String toString() {
         return color.getStr() + "Bishop";
     }

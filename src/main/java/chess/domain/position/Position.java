@@ -9,6 +9,35 @@ public final class Position {
         this.y = y;
     }
 
+    public Position(String pos) {
+        if (pos == null) {
+            throw new IllegalArgumentException("포지션 생성 문자열이 비었음");
+        }
+
+        String s = pos.trim().toLowerCase();
+        if (s.length() != 2) {
+            throw new IllegalArgumentException("포지션 생성 문자열 포맷이 옳지 않음: " + pos);
+        }
+
+        char x = s.charAt(0);   // a-h
+        char y = s.charAt(1);   // 1-8
+
+        if (x < 'a' || x > 'h') {
+            throw new IllegalArgumentException("포지션 생성 문자열 범위가 옳지 않음: " + x);
+        }
+        if (y < '1' || y > '8') {
+            throw new IllegalArgumentException("포지션 생성 문자열 범위가 옳지 않음: " + y);
+        }
+
+        this.x = x - 'a';
+        this.y = y - '1';
+    }
+
+    public Position(Position pos) {
+        this.x = pos.x;
+        this.y = pos.y;
+    }
+
     public void setX(int x) {
         this.x = x;
     }
@@ -33,11 +62,13 @@ public final class Position {
         return new Position(x, y);
     }
 
-    public Position add(Position delta) {
-        return new Position(this.x + delta.x, this.y + delta.y);
+    public void add(Position delta) {
+        this.x += delta.x;
+        this.y += delta.y;
     }
 
-    public Position add(int dx, int dy) {
-        return new Position(this.x + dx, this.y + dy);
+    public void add(int dx, int dy) {
+        this.x += dx;
+        this.y += dy;
     }
 }

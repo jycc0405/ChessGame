@@ -9,6 +9,13 @@ public class Pawn extends Piece {
         super(color, position);
     }
 
+    public Pawn(Color color, Position position, boolean hasMoved) {
+        super(color, position);
+        this.hasMoved = hasMoved;
+    }
+
+    boolean hasMoved = false;
+
     @Override
     protected boolean canMoveInternal(Position to, BoardView board) {
         int dx = position.getX() - to.getX();
@@ -18,20 +25,30 @@ public class Pawn extends Piece {
         Piece target = board.getPieceAt(to);
 
         if (dy == forward && dx == 0 && target == null) {
+            hasMoved = true;
             return true;
         }
 
         if ((!hasMoved && dy == 2 * forward && dx == 0)) {
             if (board.isEmptyBetween(position, to) && target == null) {
+                hasMoved = true;
                 return true;
             }
+
         }
 
         if (dy == forward && Math.abs(dx) == 1 && target != null && target.getColor() != color) {
+            hasMoved = true;
             return true;
         }
 
         return false;
+    }
+
+    @Override
+    public Piece copy() {
+        Position posCopy = new Position(position);
+        return new Pawn(this.color, posCopy, this.hasMoved);
     }
 
     @Override

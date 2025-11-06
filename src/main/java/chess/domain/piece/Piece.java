@@ -8,8 +8,6 @@ public abstract class Piece {
     protected final Color color;
     protected Position position;
 
-    boolean hasMoved = false;
-
     protected Piece(Color color, Position position) {
         this.color = color;
         this.position = position;
@@ -17,7 +15,7 @@ public abstract class Piece {
 
     public boolean canMove(Position to, BoardView board) {
         if (!Position.isValid(to)) return false;
-        if (!position.equals(to)) return false;
+        if (position.equals(to)) return false;
 
         Piece target = board.getPieceAt(to);
         if (target != null && target.getColor() == this.color) return false;
@@ -31,9 +29,15 @@ public abstract class Piece {
         return color;
     }
 
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
     public Position getPosition() {
         return position;
     }
 
     public abstract String toString();
+
+    public abstract Piece copy();
 }

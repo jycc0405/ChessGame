@@ -22,6 +22,12 @@ public class King extends Piece {
     }
 
     @Override
+    public Piece copy() {
+        Position posCopy = new Position(position);
+        return new King(this.color, posCopy);
+    }
+
+    @Override
     public String toString() {
         return color.getStr() + "King";
     }

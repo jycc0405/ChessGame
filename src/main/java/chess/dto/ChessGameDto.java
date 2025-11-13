@@ -1,6 +1,6 @@
 package chess.dto;
 
-import java.util.List;
+import java.util.Map;
 
-public record ChessGameDto(List<PieceDto> pieces, String currentTurn, boolean check, boolean checkmate) {
+public record ChessGameDto(Map<String, String> pieceMap, String currentTurn, boolean check, boolean checkmate) {
 }

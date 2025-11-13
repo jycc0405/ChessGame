@@ -14,7 +14,7 @@ public class ChessGame {
         this.currentTurn = Color.WHITE;
     }
 
-    public boolean move(Position from, Position to) {
+    public boolean movePiece(Position from, Position to) {
         if (!board.isMovable(from, to, currentTurn)) {
             return false;
         }
@@ -46,5 +46,9 @@ public class ChessGame {
 
     public Board getBoard() {
         return board;
+    }
+
+    public boolean hasPieceAt(Position position) {
+        return board.getPieceAt(position) != null;
     }
 }

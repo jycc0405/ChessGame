@@ -1,5 +1,7 @@
 package chess.domain.position;
 
+import java.util.Objects;
+
 public final class Position {
     private int x;
     private int y;
@@ -70,5 +72,18 @@ public final class Position {
     public void add(int dx, int dy) {
         this.x += dx;
         this.y += dy;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Position position = (Position) o;
+        return x == position.x && y == position.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }

@@ -96,6 +96,10 @@ public class Board implements BoardView {
             throw new IllegalArgumentException("불가능한 이동");
         }
 
+        if (piece instanceof  Pawn pawn){
+            pawn.moved();
+        }
+
         board.remove(from);
         piece.setPosition(to);
         board.put(to, piece);
@@ -129,7 +133,7 @@ public class Board implements BoardView {
 
         Position pos = new Position(x, y);
 
-        while (x != to.getX() || y != to.getY()) {
+        while (pos.getX() != to.getX() || pos.getY() != to.getY()) {
             Piece piece = board.get(pos);
             if (piece != null) return false;
 

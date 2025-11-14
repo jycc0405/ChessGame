@@ -46,6 +46,10 @@ public class Pawn extends Piece {
         this.hasMoved = true;
     }
 
+    public boolean canPromotion() {
+        return position.getY() == 0 || position.getY() == 7;
+    }
+
     @Override
     public Piece copy() {
         Position posCopy = new Position(position);

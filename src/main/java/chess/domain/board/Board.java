@@ -81,8 +81,8 @@ public class Board implements BoardView {
             return false;
         }
 
-        Board copyBoard=this.copy();
-        copyBoard.movePiece(from,to);
+        Board copyBoard = this.copy();
+        copyBoard.movePiece(from, to);
         return !copyBoard.isCheck(turn);
     }
 
@@ -96,13 +96,18 @@ public class Board implements BoardView {
             throw new IllegalArgumentException("불가능한 이동");
         }
 
-        if (piece instanceof  Pawn pawn){
-            pawn.moved();
-        }
-
         board.remove(from);
         piece.setPosition(to);
         board.put(to, piece);
+
+        if (piece instanceof Pawn pawn) {
+            pawn.moved();
+            if (pawn.canPromotion()) {
+                piece = new Queen(piece.getColor(), to);
+                piece.setPosition(to);
+                board.put(to, piece);
+            }
+        }
     }
 
     public List<Piece> getPieces() {
